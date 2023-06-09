@@ -1,0 +1,26 @@
+name: new_repository
+
+on: ["push"]
+
+jobs:
+  initialize:
+    if: ${{ github.repository != 'containerly/python-http-fast' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}/containerly:latest
+    - run: |
+        docker run -v $(pwd):/workspace ${{ secrets.REGISTRY_LOGIN_SERVER }}/containerly:latest repository /workspace --name example  
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "clone and code"
+        push_options: --force
