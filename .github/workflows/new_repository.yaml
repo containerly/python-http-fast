@@ -17,9 +17,9 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}/containerly:latest
+        docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}/containerly:f9179e8d87511f9936c6f2f1af0bbd8935493321
     - run: |
-        docker run -v $(pwd):/workspace ${{ secrets.REGISTRY_LOGIN_SERVER }}/containerly:latest repository /workspace --name example  
+        docker run -v $(pwd):/workspace ${{ secrets.REGISTRY_LOGIN_SERVER }}/containerly:f9179e8d87511f9936c6f2f1af0bbd8935493321 repository /workspace --name example  
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: "clone and code"
