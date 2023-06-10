@@ -1,1 +1,1 @@
-# {{ .Name }}
+# {{ .Repository.Name }}

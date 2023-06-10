@@ -1,12 +1,12 @@
 FROM python:3.9
 
-WORKDIR /{{ .Name }}
+WORKDIR /{{ .Repository.Name }}
 
-COPY ./requirements.txt /{{ .Name }}/requirements.txt
+COPY ./requirements.txt /{{ .Repository.Name }}/requirements.txt
 
-RUN pip install --no-cache-dir --upgrade -r /{{ .Name }}/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /{{ .Repository.Name }}/requirements.txt
 
-COPY ./app /{{ .Name }}/app
+COPY ./app /{{ .Repository.Name }}/app
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
 

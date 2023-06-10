@@ -1,13 +1,13 @@
 from setuptools import setup
 
 setup(
-    name="{{ .Name }}",
+    name="{{ .Repository.Name }}",
     version="1.0",
-    py_modules=["{{ .Name }}"],
+    py_modules=["{{ .Repository.Name }}"],
     include_package_data=True,
     install_requires=["click"],
     entry_points="""
         [console_scripts]
-        {{ .Name }}=app:main
+        {{ .Repository.Name }}=app:main
     """,
 )
