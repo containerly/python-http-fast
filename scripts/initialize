@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sed "s/{{ .Repository.Name }}//g" template.txt > hello.txt
