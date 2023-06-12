@@ -1,0 +1,24 @@
+name: cookiecutter
+
+on: ["push"]
+
+jobs:
+  
+  cookiecutter:
+    if: ${{ github.repository != 'containerly/cookiecutter-python-http-fast' }}
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "    project_name: ${GITHUB_REPOSITORY#*/}" >> config.yaml
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.x' # Version range or exact version of a Python version to use
+    - run: pip install cookiecutter
+    - run: cookiecutter https://github.com/containerly/cookiecutter-python-http-fast --no-input --config-file config.yaml
+    - uses: EndBug/add-and-commit@v7
+      with:
+        author_name: thamilton-containerly
+        author_email: thamilton@containerly.io
+        message: "cookiecutter"
+        add: "*"
