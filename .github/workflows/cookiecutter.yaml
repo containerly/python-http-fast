@@ -16,6 +16,7 @@ jobs:
     - run: cookiecutter https://github.com/containerly/cookiecutter-python-http-fast --no-input project_name=${GITHUB_REPOSITORY#*/} -f -o .
     - run: mv ${GITHUB_REPOSITORY#*/}/* .
     - run: rm -rf ${GITHUB_REPOSITORY#*/}
+    - run: rm .github/workflows/cookiecutter.yml
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: "cookiecutter"
